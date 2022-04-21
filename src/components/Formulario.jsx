@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-function Formulario() {
+function Formulario({pacientes, setPacientes}) {
 const [name, setName] = useState('');
 const [propietario, setPropietario] = useState('');
 const [email, setEmail] = useState('');
@@ -15,9 +15,26 @@ const handleSubmit = e =>{
   if([name, propietario, email, alta, sintomas].includes('')){
     console.log('Hay al menos un campo vacío');
     setError(true);
-    return
+    return;
   }
-  setError(false)
+  setError(false);
+
+  //Crear Pacientes
+  const objetoPacientes = {
+    name, 
+    propietario, 
+    email, 
+    alta, 
+    sintomas
+  }
+  
+  setPacientes([...pacientes, objetoPacientes]);
+  //Reiniciar Formulario
+  setName('');
+  setPropietario('');
+  setEmail('');
+  setAlta('');
+  setSintomas('');
 }
   return (
     <div className="md:w-1/2 lg:w-2/5 mx-5">
